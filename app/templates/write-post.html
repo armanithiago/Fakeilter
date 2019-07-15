@@ -1,0 +1,21 @@
+{% if current_user.is_authenticated %}
+  <div class="container write-post">
+        <form class="form-signin" action="" method="POST">
+                {{postform.csrf_token}}
+              <div class="form-label-group">
+                {{postform.text(class="form-control py-2",placeholder="Faça seu post")}}
+              </div>
+                {% if postform.errors.text %}
+                    <div class="errosForm" role="alert">
+                       <ul>
+                      {% for e in postform.errors.text %}  
+                      <li>{{ e }}</li>
+                      {% endfor %}
+                      </ul>
+                    </div>
+                {% endif %}
+              <input class="btn btn-primary" style="margin-top: 15px" type="submit" value="Postar">
+              <hr class="my-4">
+            </form>
+  </div>
+{% endif %}

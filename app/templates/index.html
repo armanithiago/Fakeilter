@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}{{super()}} - Index {% endblock %}
+
+{% block content %}
+
+
+
+<header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Bem vindo ao Fakeilter</h1>
+      <p class="lead">Um projeto em Flask</p>
+    </div>
+  </header>
+  {% include 'write-post.html' %}
+  <div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="all-posts-tab" data-toggle="tab" href="#all-posts" role="tab" aria-controls="all-posts"
+                aria-selected="true">Todos</a>
+            </li>
+            {% if current_user.is_authenticated %}
+            {% if following_post_list|length > 0 %}
+            <li class="nav-item">
+              <a class="nav-link" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following"
+                aria-selected="false">Seguindo</a>
+            </li>
+            {% endif %}
+            {% if my_post_list|length > 0 %}
+            <li class="nav-item">
+              <a class="nav-link" id="my-posts-tab" data-toggle="tab" href="#my-posts" role="tab" aria-controls="my-posts"
+                aria-selected="false">Meus</a>
+            </li>
+            {% endif %}
+            {% endif %}
+            <li class="nav-item">
+                    <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users"
+                      aria-selected="false">Usuários</a>
+            </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="all-posts" role="tabpanel" aria-labelledby="all-posts-tab">
+                {% for post in post_list %}
+                {% include 'post.html' %}
+                {% endfor %}
+            </div>
+            {% if current_user.is_authenticated %}
+            {% if following_post_list|length > 0 %}
+            <div class="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
+                    {% for post in following_post_list %}
+                    {% include 'post.html' %}
+                    {% endfor %}
+            </div>
+            {% endif %}
+            {% if my_post_list|length > 0 %}
+            <div class="tab-pane fade" id="my-posts" role="tabpanel" aria-labelledby="my-posts-tab">
+                    {% for post in my_post_list %}
+                    {% include 'post.html' %}
+                    {% endfor %}
+            </div>
+            {% endif %}
+            {% endif %}
+            <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+                    {% for u in users %}
+                    {% include 'users-list.html' %}
+                    {% endfor %}
+            </div>
+    </div>
+    <div class="container card-container" >
+            
+        </div>
+  </div>
+
+  <script>
+        {% if current_user.is_authenticated %}
+        
+        $(function(){
+            $.ajax({
+                url: "{{url_for('followers')}}",
+                type:"GET",
+                success: 
+                    function(result){
+                            console.log(result);
+                            $(result).each(function(e){
+                                var id = $(this)[0];
+                                console.log(id)
+                                $("#follow_"+id).hide();
+                                $("#unfollow_"+id).show();
+                            })
+                    }
+            });
+
+
+        });
+
+        function follow(id){
+            $.ajax({
+                url: "/follow/"+id,
+                type:"GET",
+                success: 
+                    function(result){
+                        $("#follow_"+id).hide();
+                        $("#unfollow_"+id).show();
+                    }
+            });
+        };
+
+        function unfollow(id){
+            $.ajax({
+                url: "/unfollow/"+id,
+                type:"GET",
+                success: 
+                    function(result){
+                        $("#unfollow_"+id).hide();
+                        $("#follow_"+id).show();
+                    }
+            });
+        };
+        
+        {% endif %}
+        </script>
+{% endblock %}

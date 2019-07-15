@@ -1,0 +1,12 @@
+{% block post %}
+    <div class="card bg-light mb-3">
+            <div class="card-header">{{post.user.username}}
+                {% if current_user.is_authenticated and (current_user.username == post.user.username) %}
+                    <a href="{{url_for('delete_post',id_post=post.id)}}" class="badge badge-danger delete-post">X</a>
+                {% endif %}
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{post.content}}</p>
+            </div>
+          </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+header {
+    padding: 50px 0 50px;
+  }
+
+.card-container{
+  margin-bottom: 20px;
+}
+
+.form-signin > div{
+  margin-top: 5px;
+}
+
+.errosForm {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  margin-top: .25rem;
+  font-size: smaller;
+  padding-top: 0.4rem;
+}
+
+.fixed-bottom {
+  position: inherit !important;
+}
+
+.write-post{
+  margin-top: 1.2rem;
+}
+
+.delete-post{
+  right: 0 !important;
+  position: absolute !important;
+  margin-right: 0.5rem;
+}

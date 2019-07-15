@@ -1,0 +1,16 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{u.username}}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{u.name}}</li>
+        <li class="list-group-item">{{u.email}}</li>
+    </ul>
+    {% if current_user.is_authenticated %}
+    <div class="card-body">
+        <button id="follow_{{u.id}}" onclick="follow({{u.id}})" class="btn btn-primary">Follow</button>
+        <button id="unfollow_{{u.id}}" onclick="unfollow({{u.id}})" class="btn btn-danger" style="display:none">Unfollow</button>
+    </div>
+    {% endif %}
+</div>
+

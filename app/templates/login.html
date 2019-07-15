@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{super()}} - Login {% endblock %}
+
+{% block content %}
+
+<div class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+              <div class="card-body">
+                <h5 class="card-title text-center">Login</h5>
+                <form class="form-signin" action="" method="POST">
+                    {{form.csrf_token}}
+                  <div class="form-label-group">
+                    <label>Usuário</label>
+                    {{form.username(class="form-control",placeholder="Seu usuário")}}
+                  </div>
+                  <div class="form-label-group">
+                    <label>Senha</label>
+                    {{form.password(class="form-control",placeholder="Sua senha")}}
+                  </div>
+                  <div class="custom-control custom-checkbox mb-3">
+                    <label>{{form.remember_me}} Lembrar informações</label>
+                  </div>
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
+                  <hr class="my-4">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

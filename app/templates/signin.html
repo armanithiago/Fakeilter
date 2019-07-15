@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}{{super()}} - Sign In {% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+              <div class="card-body">
+                <h5 class="card-title text-center">Inscreva-se</h5>
+                <form class="form-signin" action="" method="POST">
+                    {{form.csrf_token}}
+                  <div class="form-label-group">
+                    <label>Usuário</label>
+                    {{form.username(class="form-control",placeholder="Seu usuário")}}
+                    {% if form.errors.username %}
+                    <div class="errosForm" role="alert">
+                       <ul>
+                      {% for e in form.errors.username %}  
+                      <li>{{ e }}</li>
+                      {% endfor %}
+                      </ul>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="form-label-group">
+                    <label>Senha</label>
+                    {{form.password(class="form-control",placeholder="Sua senha")}}
+                    {% if form.errors.password %}
+                    <div class="errosForm" role="alert">
+                       <ul>
+                      {% for e in form.errors.password %}  
+                      <li>{{ e }}</li>
+                      {% endfor %}
+                      </ul>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="form-label-group">
+                    <label>Confirmar Senha</label>
+                    {{form.confirmPassword(class="form-control",placeholder="Confirme sua senha")}}
+                    {% if form.errors.confirmPassword %}
+                    <div class="errosForm" role="alert">
+                       <ul>
+                      {% for e in form.errors.confirmPassword %}  
+                      <li>{{ e }}</li>
+                      {% endfor %}
+                      </ul>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="form-label-group">
+                    <label>Nome</label>
+                    {{form.name(class="form-control",placeholder="Seu nome")}}
+                    {% if form.errors.name %}
+                    <div class="errosForm" role="alert">
+                       <ul>
+                      {% for e in form.errors.name %}  
+                      <li>{{ e }}</li>
+                      {% endfor %}
+                      </ul>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="form-label-group">
+                    <label>Email</label>
+                    {{form.email(class="form-control",placeholder="Seu email")}}
+                    {% if form.errors.email %}
+                    <div class="errosForm" role="alert">
+                       <ul>
+                      {% for e in form.errors.email %}  
+                      <li>{{ e }}</li>
+                      {% endfor %}
+                      </ul>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <br/>
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Increver</button>
+                  <hr class="my-4">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
